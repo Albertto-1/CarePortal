@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "CareType" AS ENUM ('Stationary', 'Ambulatory', 'Both');
+CREATE TYPE "CareType" AS ENUM ('Stationary', 'Ambulatory', 'Day_Care');
 
 -- CreateEnum
 CREATE TYPE "Capacity" AS ENUM ('Full', 'Available');
@@ -9,7 +9,7 @@ CREATE TABLE "Facility" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
     "zip_code" INTEGER NOT NULL,
-    "type_of_care" "CareType" NOT NULL,
+    "type_of_care" "CareType"[],
     "capacity" "Capacity" NOT NULL,
     "serves_from" INTEGER NOT NULL,
     "serves_to" INTEGER NOT NULL,

@@ -19,7 +19,7 @@ model Facility {
     name     String @db.VarChar(255)
     zip_code Int    @db.Integer()
 
-    type_of_care CareType
+    type_of_care CareType[]
     capacity     Capacity
 
     serves_from Int @db.Integer()
@@ -29,7 +29,7 @@ model Facility {
 enum CareType {
     Stationary
     Ambulatory
-    Both
+    Day_Care
 }
 
 enum Capacity {
