@@ -1,14 +1,13 @@
-import { initTRPC } from "@trpc/server";
-import superjson from "superjson";
+import { cache } from "react";
 import { ZodError } from "zod";
-import { db } from "./db";
+import superjson from "superjson";
+import { initTRPC } from "@trpc/server";
+import db from "../server/db";
 
-export const createTRPCContext = () => {
+export const createTRPCContext = cache(async () => {
   // INFO: Add elements to context here
-  return {
-    db,
-  };
-};
+  return { db };
+});
 
 const t = initTRPC.context<typeof createTRPCContext>().create({
   transformer: superjson,
@@ -25,8 +24,5 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
 });
 
 export const createTRPCRouter = t.router;
-export const publicProcedure = t.procedure;
-
-// const createCallerFactory = t.createCallerFactory;
-// const createCaller = createCallerFactory(appRouter);
-// export const caller = createCaller(createTRPCContext);
+export const baseProcedure = t.procedure;
+export const createCallerFactory = t.createCallerFactory;

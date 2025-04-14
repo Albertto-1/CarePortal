@@ -1,31 +1,19 @@
-import {
-  defaultShouldDehydrateQuery,
-  QueryClient,
-} from "@tanstack/react-query";
-import superjson from "superjson";
+import { Facility } from "@/generated/prisma";
 
-export function getBaseUrl() {
-  if (typeof window !== "undefined") return window.location.origin;
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  return `http://localhost:${process.env.PORT ?? 3000}`;
-}
+export const MAX_ZIP_CODE_DISTANCE = 3000;
 
-export const createQueryClient = () =>
-  new QueryClient({
-    defaultOptions: {
-      queries: {
-        // With SSR, we usually want to set some default staleTime
-        // above 0 to avoid refetching immediately on the client
-        staleTime: 30 * 1000,
-      },
-      dehydrate: {
-        serializeData: superjson.serialize,
-        shouldDehydrateQuery: (query) =>
-          defaultShouldDehydrateQuery(query) ||
-          query.state.status === "pending",
-      },
-      hydrate: {
-        deserializeData: superjson.deserialize,
-      },
-    },
-  });
+export const getValidFacilities = (
+  facilities: Facility[],
+  {
+    zipCode,
+  }: {
+    zipCode: number;
+  },
+): Facility[] => {
+  return facilities
+    .map((facility) => ({
+      ...facility,
+      zipDistance: Math.abs(facility.zip_code - zipCode),
+    }))
+    .sort((a, b) => a.zipDistance - b.zipDistance);
+};

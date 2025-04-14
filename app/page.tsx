@@ -1,27 +1,24 @@
 import { getQueryClient } from "@/trpc/server";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
-import { caller } from "../server/trpc";
-import FacilityMatchingForm from "./_components/FacilityMatchingForm";
+import { caller } from "../trpc/caller";
+import Navbar from "./_components/NavBar";
+import FacilityMatchingView from "./_views/FacilityMatchingView";
 
 export default async function Home() {
   const queryClient = getQueryClient();
-
-  // Just to test trpc
+  // Just to test trpc on server component
   const facilities = await caller.facilities();
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <main className="bg-bg w-screen h-screen overflow-auto flex flex-col p-8 relative">
-        <div className="hidden">{JSON.stringify(facilities)}</div>
-
-        <div className="mx-auto w-full max-w-6xl sticky top-0">
-          <img
-            src="https://caremates.de/logos/CareMatesLogo.png"
-            className="w-48"
-          />
+      <main className="bg-bg w-screen h-screen overflow-auto flex flex-col relative">
+        <div className="hidden" id="test-facilities">
+          {JSON.stringify(facilities)}
         </div>
 
-        <FacilityMatchingForm />
+        <Navbar />
+
+        <FacilityMatchingView />
       </main>
     </HydrationBoundary>
   );
