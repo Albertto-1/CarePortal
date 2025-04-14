@@ -10,6 +10,16 @@ interface StepsContextInterface {
   setCanGoNext: Dispatch<SetStateAction<boolean>>;
 }
 
-const StepsContext = createContext<StepsContextInterface>(null);
+const EMPTY_CTX = {
+  currentStepIndex: 0,
+  totalSteps: 0,
+  registerStep: () => 0,
+  setPrevLabel: () => {},
+  setCanGoPrev: () => {},
+  setNextLabel: () => {},
+  setCanGoNext: () => {},
+};
+
+const StepsContext = createContext<StepsContextInterface>(EMPTY_CTX);
 
 export default StepsContext;
