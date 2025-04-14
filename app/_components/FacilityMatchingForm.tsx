@@ -172,17 +172,21 @@ export default function FacilityMatchingForm({
                 >
                   <GenericInput
                     name={field.name}
+                    min={10000}
                     max={99999}
+                    minLength={5}
                     maxLength={5}
                     value={field.state.value}
                     onBlur={field.handleBlur}
-                    onChange={(e) =>
-                      field.handleChange(
-                        e.target.value === "" ? undefined : +e.target.value,
-                      )
-                    }
+                    onChange={(e) => {
+                      const value =
+                        e.target.value === ""
+                          ? undefined
+                          : +e.target.value.slice(0, 5);
+                      field.handleChange(value);
+                    }}
                     label="Patient Zip Code"
-                    type="text"
+                    type="number"
                     placeholder="XXXXXX"
                   />
                 </FormInputLayout>
