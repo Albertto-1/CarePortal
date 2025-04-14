@@ -28,7 +28,7 @@ export default function FacilityMatchingView() {
           "h-full",
         )}
       >
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 px-5 xl:p-0">
           <h1 className="text-4xl text-primary font-bold mb-6 px-2.5">
             {!doFoundMatches && "Check facilities availability"}
             {doFoundMatches && `Available facilities for: ${patient}`}
@@ -55,7 +55,7 @@ export default function FacilityMatchingView() {
           )}
         </div>
 
-        <div className="w-lg h-full relative">
+        <div className="w-lg h-full relative hidden xl:block">
           <Image
             alt="Care Mates platform screenshot"
             src="https://caremates.de/images/CareMates%20Mockup.png"

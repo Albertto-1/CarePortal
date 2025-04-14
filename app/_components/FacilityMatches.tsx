@@ -8,7 +8,7 @@ export default function FacilityMatches({ matches }: { matches: Facility[] }) {
     <div
       className={clsx(
         "transition-all",
-        "min-w-lg p-4",
+        "w-full lg:min-w-lg p-4",
         "rounded-3xl bg-white",
         "border border-box-border border-zinc-200",
         "shadow-lg",

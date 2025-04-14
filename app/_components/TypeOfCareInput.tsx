@@ -18,7 +18,7 @@ export default function TypeOfCareInput({
         value={selected}
         onChange={handleChange}
         aria-label="Type of care"
-        className="flex gap-4 items-center max-w-lg w-full mx-auto"
+        className="flex gap-4 items-center max-w-lg w-full mx-auto flex-wrap"
       >
         {Object.keys(CareType).map((type) => (
           <Field

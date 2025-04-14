@@ -31,7 +31,7 @@ export default function Navbar() {
         "flex items-center",
 
         "z-10",
-        "py-4 px-6",
+        "py-4 px-5 xl:px-6",
       )}
     >
       <div
@@ -69,9 +69,12 @@ export default function Navbar() {
                 "text-sm",
                 "rounded-3xl",
                 "flex items-center gap-4",
+                "whitespace-nowrap",
               )}
             >
-              <p>{option.label}</p>
+              <p className={clsx(option.icon ? "hidden sm:block" : "")}>
+                {option.label}
+              </p>
               {option.icon && (
                 <span className="size-4.5 fill-white">{option.icon}</span>
               )}
